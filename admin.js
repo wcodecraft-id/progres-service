@@ -59,6 +59,7 @@ document.getElementById('formTambah').addEventListener('submit', async (e) => {
       status: "Diterima",
       catatan_teknisi: "Barang telah diterima.",
       foto_before: base64Before,
+      foto_proses: "",
       foto_after: "",
       waktu_update: Date.now()
     });
@@ -112,9 +113,11 @@ function renderDaftar(dataList) {
       document.getElementById('modalNotaTitle').textContent = item.kode_nota;
       document.getElementById('editNotaId').value = item.kode_nota;
       document.getElementById('modalFotoBefore').src = item.foto_before || imgKosong;
+      document.getElementById('modalFotoProses').src = item.foto_proses || imgKosong;
       document.getElementById('modalFotoAfter').src = item.foto_after || imgKosong;
       document.getElementById('editStatus').value = item.status;
       document.getElementById('editCatatan').value = item.catatan_teknisi || "";
+      document.getElementById('fileProses').value = "";
       document.getElementById('fileAfter').value = "";
       modalElement.show();
     });
@@ -146,11 +149,18 @@ document.getElementById('btnSimpanUpdate').addEventListener('click', async () =>
       waktu_update: Date.now()
     };
 
+     const inputFileProses = document.getElementById('fileProses');
+    const fileProses = inputFileProses.files.length > 0 ? inputFileProses.files.item(0) : null;
+    if (fileProses) {
+     updateData.foto_proses = await prosesFotoRingan(fileProses);
+    }
+
     const inputFileAfter = document.getElementById('fileAfter');
     const fileAfter = inputFileAfter.files.length > 0 ? inputFileAfter.files.item(0) : null;
     if (fileAfter) {
-      updateData.foto_after = await prosesFotoRingan(fileAfter);
+       updateData.foto_after = await prosesFotoRingan(fileAfter);
     }
+
 
     await updateDoc(doc(db, "pesanan", kodeNota), updateData);
     modalElement.hide();
