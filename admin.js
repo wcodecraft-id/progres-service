@@ -38,7 +38,7 @@ function prosesFotoRingan(file) {
     };
   });
 }
-</script>
+
 
 document.getElementById('formTambah').addEventListener('submit', async (e) => {
   e.preventDefault();
