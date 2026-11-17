@@ -1,16 +1,23 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
-  authDomain: "progres-service.firebaseapp.com",
-  projectId: "progres-service",
-  storageBucket: "progres-service.firebasestorage.app",
-  messagingSenderId: "726589505329",
-  appId: "1:726589505329:web:af784eb2fe5e290fac3a10"
-};
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
+    authDomain: "progres-service.firebaseapp.com",
+    projectId: "progres-service",
+    storageBucket: "progres-service.firebasestorage.app",
+    messagingSenderId: "726589505329",
+    appId: "1:726589505329:web:af784eb2fe5e290fac3a10"
+  };
 
-const app = initializeApp(firebaseConfig);
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
+
 const db = getFirestore(app);
 const modalElement = new bootstrap.Modal(document.getElementById('modalUpdate'));
 const imgKosong = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://w3.org' width='300' height='180'%3E%3Crect fill='%23EAE5D9' width='300' height='180'/%3E%3Ctext fill='%236C757D' font-family='sans-serif' font-size='14' dy='5' text-anchor='middle' x='150' y='90'%3EBelum Ada Foto%3C/text%3E%3C/svg%3E";
