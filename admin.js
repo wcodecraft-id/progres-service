@@ -39,7 +39,6 @@ function prosesFotoRingan(file) {
   });
 }
 
-
 document.getElementById('formTambah').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('btnSimpanBaru');
