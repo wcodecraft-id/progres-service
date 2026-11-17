@@ -59,18 +59,21 @@
       </div>
     </div>
 
-    <div class="row g-3 mt-2">
-      <div class="col-6">
-        <span class="text-muted small d-block mb-1 fw-semibold">Foto Awal (Before)</span>
-        <img id="fotoBefore" src="" alt="Belum ada foto awal" class="img-preview">
+        <div class="row g-2 mt-2">
+      <div class="col-4">
+        <span class="text-muted small d-block mb-1 fw-semibold">1. Awal (Before)</span>
+        <img id="fotoBefore" src="" alt="Belum ada foto" class="img-preview" style="height: 150px;">
       </div>
-      <div class="col-6">
-        <span class="text-muted small d-block mb-1 fw-semibold">Hasil Akhir (After)</span>
-        <img id="fotoAfter" src="" alt="Belum ada foto hasil" class="img-preview">
+      <div class="col-4">
+        <span class="text-muted small d-block mb-1 fw-semibold">2. Proses</span>
+        <img id="fotoProses" src="" alt="Belum ada foto" class="img-preview" style="height: 150px;">
+      </div>
+      <div class="col-4">
+        <span class="text-muted small d-block mb-1 fw-semibold">3. Akhir (After)</span>
+        <img id="fotoAfter" src="" alt="Belum ada foto" class="img-preview" style="height: 150px;">
       </div>
     </div>
-  </div>
-</div>
+
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
@@ -108,8 +111,9 @@
         if (data.status === 'Diterima') document.getElementById('stepDiterima').classList.add('step-active');
         if (data.status === 'Diproses') document.getElementById('stepDiproses').classList.add('step-active');
         if (data.status === 'Siap Diambil') document.getElementById('stepSelesai').classList.add('step-active');
-
+        
         document.getElementById('fotoBefore').src = data.foto_before || imgKosong;
+        document.getElementById('fotoProses').src = data.foto_proses || imgKosong;
         document.getElementById('fotoAfter').src = data.foto_after || imgKosong;
         document.getElementById('hasilContainer').classList.remove('d-none');
       } else {
