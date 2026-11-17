@@ -1,4 +1,3 @@
-<script type="module">
   // Import the functions you need from the SDKs you need
   import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
@@ -16,12 +15,10 @@
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-</script>
-
-const db = getFirestore(app);
-const modalElement = new bootstrap.Modal(document.getElementById('modalUpdate'));
-const imgKosong = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://w3.org' width='300' height='180'%3E%3Crect fill='%23EAE5D9' width='300' height='180'/%3E%3Ctext fill='%236C757D' font-family='sans-serif' font-size='14' dy='5' text-anchor='middle' x='150' y='90'%3EBelum Ada Foto%3C/text%3E%3C/svg%3E";
-let semuaData = [];
+  const db = getFirestore(app);
+  const modalElement = new bootstrap.Modal(document.getElementById('modalUpdate'));
+  const imgKosong = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://w3.org' width='300' height='180'%3E%3Crect fill='%23EAE5D9' width='300' height='180'/%3E%3Ctext fill='%236C757D' font-family='sans-serif' font-size='14' dy='5' text-anchor='middle' x='150' y='90'%3EBelum Ada Foto%3C/text%3E%3C/svg%3E";
+  let semuaData = [];
 
 function prosesFotoRingan(file) {
   return new Promise((resolve) => {
