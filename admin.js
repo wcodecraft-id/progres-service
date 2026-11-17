@@ -84,7 +84,7 @@ function renderDaftar(dataList) {
     const thumb = item.foto_before || imgKosong;
     const baseUrl = window.location.href.replace('admin.html', 'cek.html');
     const pesanWa = encodeURIComponent(`Halo Kak ${item.nama_pelanggan}, pesanan *${item.nama_barang}* (Nota: *${item.kode_nota}*) saat ini berstatus *${item.status.toUpperCase()}*. Cek detail & foto bukti di: ${baseUrl}?nota=${item.kode_nota}`);
-    const linkWa = `https://wa.me{item.no_wa}?text=${pesanWa}`;
+    const linkWa = `https://wa.me/${item.no_wa}?text=${pesanWa}`;
 
     return `
       <div class="row-item p-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
