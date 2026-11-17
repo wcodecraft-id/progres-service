@@ -67,20 +67,29 @@
       </div>
       <div class="modal-body">
         <input type="hidden" id="editNotaId">
-        <div class="row g-2 mb-3 text-center">
-          <div class="col-6">
-            <span class="small text-muted d-block mb-1">Foto Awal (Before)</span>
-            <img id="modalFotoBefore" src="" class="modal-img">
+              <div class="row g-2 mb-3 text-center">
+          <div class="col-4">
+            <span class="small text-muted d-block mb-1">1. Awal</span>
+            <img id="modalFotoBefore" src="" class="modal-img" style="height: 120px;">
           </div>
-          <div class="col-6">
-            <span class="small text-muted d-block mb-1">Hasil Akhir (After)</span>
-            <img id="modalFotoAfter" src="" class="modal-img">
+          <div class="col-4">
+            <span class="small text-muted d-block mb-1">2. Proses</span>
+            <img id="modalFotoProses" src="" class="modal-img" style="height: 120px;">
           </div>
+          <div class="col-4">
+            <span class="small text-muted d-block mb-1">3. Akhir</span>
+            <img id="modalFotoAfter" src="" class="modal-img" style="height: 120px;">
+          </div>
+        </div>
+        <div class="mb-2">
+          <label class="form-label small text-muted">Unggah / Ganti Foto Proses</label>
+          <input type="file" id="fileProses" class="form-control form-control-sm" accept="image/*" capture="environment">
         </div>
         <div class="mb-3">
           <label class="form-label small text-muted">Unggah / Ganti Foto Hasil Akhir (After)</label>
           <input type="file" id="fileAfter" class="form-control form-control-sm" accept="image/*" capture="environment">
         </div>
+
         <div class="mb-3">
           <label class="form-label small text-muted">Status Pengerjaan</label>
           <select id="editStatus" class="form-select">
@@ -99,6 +108,6 @@
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="admin.js?v=6"></script>
+<script type="module" src="admin.js?v=7"></script>
 </body>
 </html>
