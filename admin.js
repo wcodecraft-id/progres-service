@@ -3,7 +3,7 @@ import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, query, or
 
 const firebaseConfig = {
   apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
-  authDomain: "://firebaseapp.com",
+  authDomain: "progres-service.firebaseapp.com",
   projectId: "progres-service",
   storageBucket: "progres-service.firebasestorage.app",
   messagingSenderId: "726589505329",
