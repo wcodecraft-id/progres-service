@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KabarJasa — Pantau Progres Jasa & Pesanan Real-Time</title>
+  <link rel="stylesheet" href="https://jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css">
+  <style>
+    body { background-color: #F6F3EC; color: #2F3632; font-family: 'Segoe UI', sans-serif; }
+    .navbar-custom { background-color: #FFFFFF; border-bottom: 1px solid #E5E0D5; }
+    .card-custom { background-color: #FFFFFF; border: 1px solid #E5E0D5; border-radius: 16px; transition: 0.2s; }
+    .card-custom:hover { border-color: #5B7A67; transform: translateY(-2px); }
+    .btn-sage { background-color: #5B7A67; color: #FFFFFF; border: none; }
+    .btn-sage:hover { background-color: #496353; color: #FFFFFF; }
+    .btn-outline-sage { border: 1px solid #5B7A67; color: #3D5245; background-color: transparent; }
+    .btn-outline-sage:hover { background-color: #5B7A67; color: #FFFFFF; }
+    .badge-soft { background-color: #E6ECE8; color: #3D5245; font-weight: 600; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; }
+    .step-circle { width: 36px; height: 36px; border-radius: 50%; background-color: #5B7A67; color: #FFFFFF; display: inline-flex; align-items: center; justify-content: center; font-weight: bold; }
+  </style>
+</head>
+<body>
+
+<!-- Navigasi Atas -->
+<nav class="navbar navbar-custom py-3">
+  <div class="container" style="max-width: 960px;">
+    <a class="navbar-brand fw-bold fs-4 mb-0" href="index.html" style="color: #3D5245;">KabarJasa</a>
+    <div class="d-flex gap-2">
+      <a href="cek.html" class="btn btn-outline-sage btn-sm px-3 fw-semibold">Cek Nota</a>
+      <a href="admin.html" class="btn btn-sage btn-sm px-3 fw-semibold">Dasbor Admin</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="py-5">
+  <div class="container text-center" style="max-width: 720px;">
+    <span class="badge-soft mb-3 d-inline-block">Transparan • Tanpa Instal Aplikasi • Terhubung WhatsApp</span>
+    <h1 class="fw-bold mb-3" style="color: #2F3632;">Kabar Progres Jasa & Pesanan dalam Satu Klik</h1>
+    <p class="text-muted mb-4">
+      Solusi pemantauan status pengerjaan secara <em>real-time</em> untuk berbagai usaha jasa. 
+      Pelanggan cukup masukkan kode nota untuk melihat bukti foto <strong>Awal, Proses, dan Hasil Akhir</strong> tanpa chat berulang kali.
+    </p>
+    <div class="d-flex flex-wrap justify-content-center gap-3">
+      <a href="cek.html" class="btn btn-sage btn-lg px-4 fw-semibold">Cek Progres Pesanan</a>
+      <a href="admin.html" class="btn btn-outline-sage btn-lg px-4 fw-semibold">Coba Demo Admin ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- Cara Kerja 3 Langkah -->
+<section class="py-4">
+  <div class="container" style="max-width: 960px;">
+    <div class="card-custom p-4 p-md-5 shadow-sm">
+      <h5 class="fw-bold text-center mb-4" style="color: #3D5245;">Alur Kerja KabarJasa</h5>
+      <div class="row g-4 text-center">
+        <div class="col-md-4">
+          <div class="step-circle mb-3">1</div>
+          <h6 class="fw-bold">Catat & Foto Awal</h6>
+          <p class="text-muted small mb-0">Admin mencatat pesanan baru, mengunggah foto kondisi awal, dan sistem membuat kode nota unik otomatis.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="step-circle mb-3">2</div>
+          <h6 class="fw-bold">Update Bukti Pengerjaan</h6>
+          <p class="text-muted small mb-0">Teknisi memperbarui status pengerjaan beserta foto tahap proses dan hasil akhir langsung dari HP atau laptop.</p>
+        </div>
+        <div class="col-md-4">
+          <div class="step-circle mb-3">3</div>
+          <h6 class="fw-bold">Kabari ke WhatsApp</h6>
+          <p class="text-muted small mb-0">Sekali klik tombol kirim, pelanggan langsung menerima pesan otomatis beserta tautan bukti foto di WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cocok untuk Berbagai Bidang Jasa -->
+<section class="py-4 mb-4">
+  <div class="container" style="max-width: 960px;">
+    <div class="text-center mb-4">
+      <h5 class="fw-bold" style="color: #3D5245;">Fleksibel untuk Berbagai Jenis Usaha Jasa</h5>
+      <p class="text-muted small">Dapat disesuaikan untuk UMKM maupun bengkel spesialis.</p>
+    </div>
+    <div class="row g-3">
+      <div class="col-6 col-md-3">
+        <div class="card-custom p-3 text-center h-100">
+          <div class="fs-3 mb-2">🔧</div>
+          <h6 class="fw-bold small mb-1">Servis & Bengkel</h6>
+          <p class="text-muted small mb-0" style="font-size: 0.78rem;">HP, laptop, AC, motor, dan peralatan elektronik.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card-custom p-3 text-center h-100">
+          <div class="fs-3 mb-2">👟</div>
+          <h6 class="fw-bold small mb-1">Laundry & Cuci Sepatu</h6>
+          <p class="text-muted small mb-0" style="font-size: 0.78rem;">Treatment sepatu, tas, helm, dan laundry satuan.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card-custom p-3 text-center h-100">
+          <div class="fs-3 mb-2">🧵</div>
+          <h6 class="fw-bold small mb-1">Jahit & Konveksi</h6>
+          <p class="text-muted small mb-0" style="font-size: 0.78rem;">Pesanan seragam, permak pakaian, dan sablon custom.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card-custom p-3 text-center h-100">
+          <div class="fs-3 mb-2">🎨</div>
+          <h6 class="fw-bold small mb-1">Studio & Percetakan</h6>
+          <p class="text-muted small mb-0" style="font-size: 0.78rem;">Cetak banner, undangan, bingkai, dan kerajinan.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-4 text-center text-muted small border-top" style="border-color: #E5E0D5 !important;">
+  <div class="container">
+    <p class="mb-1 fw-semibold" style="color: #3D5245;">KabarJasa — Sistem Pemantauan Progres Layanan & Jasa</p>
+    <p class="mb-0">Dibangun dengan HTML5, Bootstrap 5, JavaScript, dan Google Firebase.</p>
+  </div>
+</footer>
+
+</body>
+</html>
