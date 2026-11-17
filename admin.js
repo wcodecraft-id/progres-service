@@ -1,16 +1,15 @@
-// Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
-  authDomain: "progres-service.firebaseapp.com",
-  projectId: "progres-service",
-  storageBucket: "progres-service.firebasestorage.app",
-  messagingSenderId: "726589505329",
-  appId: "1:726589505329:web:af784eb2fe5e290fac3a10"
+    apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
+    authDomain: "progres-service.firebaseapp.com",
+    projectId: "progres-service",
+    storageBucket: "progres-service.firebasestorage.app",
+    messagingSenderId: "726589505329",
+    appId: "1:726589505329:web:af784eb2fe5e290fac3a10"
 };
 
 // Initialize Firebase
