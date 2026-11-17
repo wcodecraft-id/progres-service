@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cek Progres Pesanan & Servis</title>
+  <link href="https://jsdelivr.net" rel="stylesheet">
+  <style>
+    body { background-color: #F6F3EC; color: #2F3632; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    .card-custom { background-color: #FFFFFF; border: 1px solid #E5E0D5; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+    .btn-sage { background-color: #5B7A67; color: #FFFFFF; border: none; }
+    .btn-sage:hover { background-color: #496353; color: #FFFFFF; }
+    .step-badge { padding: 8px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; background-color: #EAE5D9; color: #6C757D; }
+    .step-active { background-color: #5B7A67; color: #FFFFFF; }
+    .img-preview { width: 100%; height: 200px; object-fit: cover; border-radius: 10px; border: 1px solid #E5E0D5; background-color: #F8F6F0; }
+  </style>
+</head>
+<body>
+
+<div class="container py-5" style="max-width: 600px;">
+  <div class="text-center mb-4">
+    <h4 class="fw-bold" style="color: #3D5245;">Pantau Progres Pesanan</h4>
+    <p class="text-muted small">Masukkan kode nota Anda untuk melihat status pengerjaan dan bukti foto terkini.</p>
+  </div>
+
+  <!-- Kotak Pencarian Nota -->
+  <div class="card-custom p-4 mb-4">
+    <div class="input-group">
+      <input type="text" id="inputNota" class="form-control form-control-lg" placeholder="Contoh: SRV-101" style="text-transform: uppercase;">
+      <button class="btn btn-sage px-4 fw-semibold" id="btnCari">Cek Status</button>
+    </div>
+    <div id="pesanError" class="text-danger small mt-2 d-none">Kode nota tidak ditemukan. Pastikan penulisan sudah benar.</div>
+  </div>
+
+  <!-- Hasil Pencarian -->
+  <div id="hasilContainer" class="card-custom p-4 d-none">
+    <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
+      <div>
+        <span class="text-muted small d-block">Kode Nota</span>
+        <strong id="tampilNota" class="fs-5"></strong>
+      </div>
+      <div class="text-end">
+        <span class="text-muted small d-block">Pelanggan</span>
+        <strong id="tampilNama"></strong>
+      </div>
+    </div>
+
+    <!-- Indikator Status -->
+    <div class="d-flex justify-content-between text-center my-4 gap-1">
+      <div id="stepDiterima" class="step-badge flex-fill">1. Diterima</div>
+      <div id="stepDiproses" class="step-badge flex-fill">2. Diproses</div>
+      <div id="stepSelesai" class="step-badge flex-fill">3. Siap Diambil</div>
+    </div>
+
+    <div class="mb-3">
+      <span class="text-muted small d-block">Item / Jasa</span>
+      <p id="tampilBarang" class="fw-semibold mb-2"></p>
+      
+      <span class="text-muted small d-block">Catatan Teknisi / Admin</span>
+      <div class="p-3 rounded-3" style="background-color: #F6F3EC;">
+        <p id="tampilCatatan" class="mb-0 small"></p>
+      </div>
+    </div>
+
+    <!-- Foto Before & After -->
+    <div class="row g-3 mt-2">
+      <div class="col-6">
+        <span class="text-muted small d-block mb-1 fw-semibold">Foto Awal (Before)</span>
+        <img id="fotoBefore" src="" alt="Belum ada foto awal" class="img-preview">
+      </div>
+      <div class="col-6">
+        <span class="text-muted small d-block mb-1 fw-semibold">Hasil Akhir (After)</span>
+        <img id="fotoAfter" src="" alt="Belum ada foto hasil" class="img-preview">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://gstatic.com";
+  import { getFirestore, doc, getDoc } from "https://gstatic.com";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
+    authDomain: "progres-service.firebaseapp.com",
+    projectId: "progres-service",
+    storageBucket: "progres-service.firebasestorage.app",
+    messagingSenderId: "726589505329",
+    appId: "1:726589505329:web:af784eb2fe5e290fac3a10"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const inputNota = document.getElementById('inputNota');
+  const btnCari = document.getElementById('btnCari');
+  const hasilContainer = document.getElementById('hasilContainer');
+  const pesanError = document.getElementById('pesanError');
+
+  async function cariPesanan(kode) {
+    if (!kode) return;
+    const kodeBersih = kode.trim().toUpperCase();
+    pesanError.classList.add('d-none');
+    hasilContainer.classList.add('d-none');
+
+    try {
+      const docRef = doc(db, "pesanan", kodeBersih);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        document.getElementById('tampilNota').textContent = kodeBersih;
+        document.getElementById('tampilNama').textContent = data.nama_pelanggan;
+        document.getElementById('tampilBarang').textContent = data.nama_barang;
+        document.getElementById('tampilCatatan').textContent = data.catatan_teknisi || "Barang telah diterima dan masuk antrean pengerjaan.";
+
+        ['stepDiterima', 'stepDiproses', 'stepSelesai'].forEach(id => document.getElementById(id).classList.remove('step-active'));
+        if (data.status === 'Diterima') document.getElementById('stepDiterima').classList.add('step-active');
+        if (data.status === 'Diproses') document.getElementById('stepDiproses').classList.add('step-active');
+        if (data.status === 'Siap Diambil') document.getElementById('stepSelesai').classList.add('step-active');
+
+        const placeholderImg = "https://placeholder.com";
+        document.getElementById('fotoBefore').src = data.foto_before || placeholderImg;
+        document.getElementById('fotoAfter').src = data.foto_after || placeholderImg;
+
+        hasilContainer.classList.remove('d-none');
+      } else {
+        pesanError.classList.remove('d-none');
+      }
+    } catch (error) {
+      alert("Terjadi kesalahan koneksi: " + error.message);
+    }
+  }
+
+  btnCari.addEventListener('click', () => cariPesanan(inputNota.value));
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const notaUrl = urlParams.get('nota');
+  if (notaUrl) {
+    inputNota.value = notaUrl;
+    cariPesanan(notaUrl);
+  }
+</script>
+</body>
+</html>
