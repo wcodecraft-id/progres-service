@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dasbor Admin - Progres Pesanan</title>
+  <link href="https://jsdelivr.net" rel="stylesheet">
+  <style>
+    body { background-color: #F6F3EC; color: #2F3632; font-family: 'Segoe UI', sans-serif; }
+    .card-custom { background-color: #FFFFFF; border: 1px solid #E5E0D5; border-radius: 14px; }
+    .btn-sage { background-color: #5B7A67; color: #FFFFFF; border: none; }
+    .btn-sage:hover { background-color: #496353; color: #FFFFFF; }
+    .row-item { background-color: #FFFFFF; border: 1px solid #E5E0D5; border-radius: 12px; }
+    .thumb-img { width: 48px; height: 48px; object-fit: cover; border-radius: 8px; background-color: #EAE5D9; }
+    .modal-img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; border: 1px solid #E5E0D5; }
+  </style>
+</head>
+<body>
+
+<div class="container py-4" style="max-width: 960px;">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h4 class="fw-bold mb-0" style="color: #3D5245;">Dasbor Admin & Teknisi</h4>
+    <a href="cek.html" target="_blank" class="btn btn-outline-secondary btn-sm">Lihat Halaman Pelanggan ↗</a>
+  </div>
+
+  <div class="card-custom p-4 mb-4 shadow-sm">
+    <h6 class="fw-bold mb-3">Tambah Pesanan Baru</h6>
+    <form id="formTambah" class="row g-3">
+      <div class="col-md-3">
+        <label class="form-label small text-muted">Nama Pelanggan</label>
+        <input type="text" id="namaPelanggan" class="form-control" placeholder="Contoh: Eko Prasetyo" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small text-muted">No. WhatsApp (628...)</label>
+        <input type="text" id="noWa" class="form-control" placeholder="628123456789" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small text-muted">Nama Barang / Jasa</label>
+        <input type="text" id="namaBarang" class="form-control" placeholder="Servis Laptop Asus" required>
+      </div>
+      <div class="col-md-3">
+        <label class="form-label small text-muted">Foto Awal (Before)</label>
+        <input type="file" id="fileBefore" class="form-control" accept="image/*" capture="environment">
+      </div>
+      <div class="col-12 text-end">
+        <button type="submit" id="btnSimpanBaru" class="btn btn-sage px-4 fw-semibold">Simpan Pesanan</button>
+      </div>
+    </form>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h6 class="fw-bold mb-0">Daftar Pesanan Aktif</h6>
+    <input type="text" id="cariNama" class="form-control form-control-sm" style="max-width: 240px;" placeholder="Cari nama atau nota...">
+  </div>
+
+  <div id="daftarPesanan" class="d-flex flex-column gap-2">
+    <div class="text-center text-muted py-4">Memuat data pesanan...</div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalUpdate" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 16px;">
+      <div class="modal-header border-0 pb-0">
+        <h6 class="modal-title fw-bold">Update Progres & Bukti Foto (<span id="modalNotaTitle"></span>)</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="editNotaId">
+        <div class="row g-2 mb-3 text-center">
+          <div class="col-6">
+            <span class="small text-muted d-block mb-1">Foto Awal (Before)</span>
+            <img id="modalFotoBefore" src="" class="modal-img">
+          </div>
+          <div class="col-6">
+            <span class="small text-muted d-block mb-1">Hasil Akhir (After)</span>
+            <img id="modalFotoAfter" src="" class="modal-img">
+          </div>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small text-muted">Unggah / Ganti Foto Hasil Akhir (After)</label>
+          <input type="file" id="fileAfter" class="form-control form-control-sm" accept="image/*" capture="environment">
+        </div>
+        <div class="mb-3">
+          <label class="form-label small text-muted">Status Pengerjaan</label>
+          <select id="editStatus" class="form-select">
+            <option value="Diterima">Diterima</option>
+            <option value="Diproses">Diproses</option>
+            <option value="Siap Diambil">Siap Diambil</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label small text-muted">Catatan Teknisi</label>
+          <textarea id="editCatatan" class="form-control" rows="2" placeholder="Tulis progres pengerjaan..."></textarea>
+        </div>
+        <button type="button" id="btnSimpanUpdate" class="btn btn-sage w-100 fw-semibold">Simpan Perubahan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://jsdelivr.net"></script>
+<script type="module" src="admin.js"></script>
+</body>
+</html>
