@@ -6,7 +6,7 @@
   <title>Cek Progres Pesanan & Servis</title>
   <link rel="stylesheet" href="https://cloudflare.com">
   <style>
-    body { background-color: #F6F3EC; color: #2F3632; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { background-color: #F6F3EC; color: #2F3632; font-family: 'Segoe UI', sans-serif; }
     .card-custom { background-color: #FFFFFF; border: 1px solid #E5E0D5; border-radius: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
     .btn-sage { background-color: #5B7A67; color: #FFFFFF; border: none; }
     .btn-sage:hover { background-color: #496353; color: #FFFFFF; }
@@ -23,7 +23,6 @@
     <p class="text-muted small">Masukkan kode nota Anda untuk melihat status pengerjaan dan bukti foto terkini.</p>
   </div>
 
-  <!-- Kotak Pencarian Nota -->
   <div class="card-custom p-4 mb-4">
     <div class="input-group">
       <input type="text" id="inputNota" class="form-control form-control-lg" placeholder="Contoh: SRV-101" style="text-transform: uppercase;">
@@ -32,7 +31,6 @@
     <div id="pesanError" class="text-danger small mt-2 d-none">Kode nota tidak ditemukan. Pastikan penulisan sudah benar.</div>
   </div>
 
-  <!-- Hasil Pencarian -->
   <div id="hasilContainer" class="card-custom p-4 d-none">
     <div class="d-flex justify-content-between align-items-center border-bottom pb-3 mb-3">
       <div>
@@ -45,7 +43,6 @@
       </div>
     </div>
 
-    <!-- Indikator Status -->
     <div class="d-flex justify-content-between text-center my-4 gap-1">
       <div id="stepDiterima" class="step-badge flex-fill">1. Diterima</div>
       <div id="stepDiproses" class="step-badge flex-fill">2. Diproses</div>
@@ -62,7 +59,6 @@
       </div>
     </div>
 
-    <!-- Foto Before & After -->
     <div class="row g-3 mt-2">
       <div class="col-6">
         <span class="text-muted small d-block mb-1 fw-semibold">Foto Awal (Before)</span>
@@ -82,7 +78,7 @@
 
   const firebaseConfig = {
     apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
-    authDomain: "progres-service.firebaseapp.com",
+    authDomain: "://firebaseapp.com",
     projectId: "progres-service",
     storageBucket: "progres-service.firebasestorage.app",
     messagingSenderId: "726589505329",
@@ -91,53 +87,44 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
-  const inputNota = document.getElementById('inputNota');
-  const btnCari = document.getElementById('btnCari');
-  const hasilContainer = document.getElementById('hasilContainer');
-  const pesanError = document.getElementById('pesanError');
+  const imgKosong = "data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://w3.org' width='300' height='200'%3E%3Crect fill='%23EAE5D9' width='300' height='200'/%3E%3Ctext fill='%236C757D' font-family='sans-serif' font-size='14' dy='5' text-anchor='middle' x='150' y='100'%3EBelum Ada Foto%3C/text%3E%3C/svg%3E";
 
   async function cariPesanan(kode) {
     if (!kode) return;
     const kodeBersih = kode.trim().toUpperCase();
-    pesanError.classList.add('d-none');
-    hasilContainer.classList.add('d-none');
+    document.getElementById('pesanError').classList.add('d-none');
+    document.getElementById('hasilContainer').classList.add('d-none');
 
     try {
-      const docRef = doc(db, "pesanan", kodeBersih);
-      const docSnap = await getDoc(docRef);
-
+      const docSnap = await getDoc(doc(db, "pesanan", kodeBersih));
       if (docSnap.exists()) {
         const data = docSnap.data();
         document.getElementById('tampilNota').textContent = kodeBersih;
         document.getElementById('tampilNama').textContent = data.nama_pelanggan;
         document.getElementById('tampilBarang').textContent = data.nama_barang;
-        document.getElementById('tampilCatatan').textContent = data.catatan_teknisi || "Barang telah diterima dan masuk antrean pengerjaan.";
+        document.getElementById('tampilCatatan').textContent = data.catatan_teknisi || "Barang telah diterima.";
 
         ['stepDiterima', 'stepDiproses', 'stepSelesai'].forEach(id => document.getElementById(id).classList.remove('step-active'));
         if (data.status === 'Diterima') document.getElementById('stepDiterima').classList.add('step-active');
         if (data.status === 'Diproses') document.getElementById('stepDiproses').classList.add('step-active');
         if (data.status === 'Siap Diambil') document.getElementById('stepSelesai').classList.add('step-active');
 
-        const placeholderImg = "https://placeholder.com";
-        document.getElementById('fotoBefore').src = data.foto_before || placeholderImg;
-        document.getElementById('fotoAfter').src = data.foto_after || placeholderImg;
-
-        hasilContainer.classList.remove('d-none');
+        document.getElementById('fotoBefore').src = data.foto_before || imgKosong;
+        document.getElementById('fotoAfter').src = data.foto_after || imgKosong;
+        document.getElementById('hasilContainer').classList.remove('d-none');
       } else {
-        pesanError.classList.remove('d-none');
+        document.getElementById('pesanError').classList.remove('d-none');
       }
     } catch (error) {
-      alert("Terjadi kesalahan koneksi: " + error.message);
+      alert("Kesalahan koneksi: " + error.message);
     }
   }
 
-  btnCari.addEventListener('click', () => cariPesanan(inputNota.value));
+  document.getElementById('btnCari').addEventListener('click', () => cariPesanan(document.getElementById('inputNota').value));
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const notaUrl = urlParams.get('nota');
+  const notaUrl = new URLSearchParams(window.location.search).get('nota');
   if (notaUrl) {
-    inputNota.value = notaUrl;
+    document.getElementById('inputNota').value = notaUrl;
     cariPesanan(notaUrl);
   }
 </script>
