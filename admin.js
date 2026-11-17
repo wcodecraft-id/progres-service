@@ -1,9 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-app.js";
 import { getFirestore, collection, doc, setDoc, updateDoc, onSnapshot, query, orderBy } from "https://www.gstatic.com/firebasejs/13.4.0/firebase-firestore.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyAgo-fw-YwrvOq1ONO1Z5V7ElHZu41cndQ",
     authDomain: "progres-service.firebaseapp.com",
@@ -41,6 +38,7 @@ function prosesFotoRingan(file) {
     };
   });
 }
+</script>
 
 document.getElementById('formTambah').addEventListener('submit', async (e) => {
   e.preventDefault();
