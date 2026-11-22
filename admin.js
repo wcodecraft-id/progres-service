@@ -88,20 +88,21 @@ function renderDaftar(dataList) {
     const pesanWa = encodeURIComponent(`Halo Kak ${item.nama_pelanggan}, pesanan *${item.nama_barang}* (Nota: *${item.kode_nota}*) saat ini berstatus *${item.status.toUpperCase()}*. Cek detail & foto bukti di: ${baseUrl}?nota=${item.kode_nota}`);
     const linkWa = `https://wa.me/${item.no_wa}?text=${pesanWa}`;
 
-      
-    return `
-      <div class="row-item p-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
+        return `
+      <div class="row-item p-3 d-flex flex-column flex-md-row align-items-stretch align-items-md-center justify-content-between gap-3">
         <div class="d-flex align-items-center gap-3">
           <img src="${thumb}" class="thumb-img" alt="Foto">
-          <div>
-            <span class="fw-bold d-block">${item.kode_nota} — ${item.nama_pelanggan}</span>
-            <span class="small text-muted">${item.nama_barang}</span>
+          <div class="overflow-hidden">
+            <div class="d-flex align-items-center gap-2 flex-wrap">
+              <span class="fw-bold">${item.kode_nota} — ${item.nama_pelanggan}</span>
+              <span class="badge ${badgeColor}">${item.status}</span>
+            </div>
+            <span class="small text-muted d-block text-truncate">${item.nama_barang}</span>
           </div>
         </div>
-        <div class="d-flex align-items-center gap-2">
-          <span class="badge ${badgeColor} px-3 py-2">${item.status}</span>
-          <a href="${linkWa}" target="_blank" class="btn btn-outline-success btn-sm">Kirim Info WA</a>
-          <button class="btn btn-outline-dark btn-sm btn-edit" data-id="${item.kode_nota}">Update Foto & Detail</button>
+        <div class="d-flex gap-2">
+          <a href="${linkWa}" target="_blank" class="btn btn-outline-success btn-sm flex-fill text-nowrap">Kirim WA</a>
+          <button class="btn btn-outline-dark btn-sm flex-fill text-nowrap btn-edit" data-id="${item.kode_nota}">Update Detail</button>
         </div>
       </div>
     `;
