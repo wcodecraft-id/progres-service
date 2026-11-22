@@ -3,66 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dasbor Admin - Progres Pesanan</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/css/bootstrap.min.css">
- <style>
-    body { background: linear-gradient(160deg, #F3F7F5 0%, #E6EFEA 50%, #EDF3F0 100%); min-height: 100vh; color: #26322C; font-family: 'Segoe UI', system-ui, sans-serif; }
+  <title>Dasbor Admin — KabarJasa</title>
+  <link rel="stylesheet" href="https://jsdelivr.net">
+  <style>
+    body {
+      background-color: #DCE7E1;
+      background-image: 
+        repeating-linear-gradient(-45deg, rgba(91, 122, 103, 0.06) 0px, rgba(91, 122, 103, 0.06) 2px, transparent 2px, transparent 14px),
+        linear-gradient(135deg, #E8F0EC 0%, #C8DBD1 50%, #DCE8E2 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+      color: #26322C;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
     .navbar-custom { background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #DCE5E0; box-shadow: 0 4px 16px rgba(38, 50, 44, 0.04); }
-    .card-custom { background: rgba(255, 255, 255, 0.88); backdrop-filter: blur(12px); border: 1px solid #DCE5E0; border-radius: 16px; }
+    .nav-btn { font-size: 0.85rem; padding: 6px 14px; border-radius: 8px; white-space: nowrap; }
+    @media (max-width: 576px) {
+      .navbar-brand { font-size: 1.15rem !important; }
+      .nav-btn { font-size: 0.75rem; padding: 5px 10px; }
+    }
+    .card-custom { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(12px); border: 1px solid #D5E2DB; border-radius: 16px; box-shadow: 0 8px 24px rgba(61, 82, 69, 0.08); }
     .btn-sage { background-color: #5B7A67; color: #FFFFFF; border: none; }
     .btn-sage:hover { background-color: #496353; color: #FFFFFF; }
-    .row-item { background: rgba(255, 255, 255, 0.92); border: 1px solid #DCE5E0; border-radius: 14px; transition: 0.2s; }
-    .row-item:hover { border-color: #5B7A67; box-shadow: 0 6px 16px rgba(91, 122, 103, 0.08); }
-    .thumb-img { width: 48px; height: 48px; object-fit: cover; border-radius: 10px; background-color: #E3ECE7; }
-    .modal-img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; border: 1px solid #DCE5E0; background-color: #EDF3F0; }
+    .row-item { background: #FFFFFF; border: 1px solid #D5E2DB; border-radius: 14px; box-shadow: 0 4px 14px rgba(61, 82, 69, 0.06); transition: 0.2s; }
+    .row-item:hover { border-color: #5B7A67; }
+    .thumb-img { width: 52px; height: 52px; object-fit: cover; border-radius: 10px; background-color: #E3ECE7; flex-shrink: 0; }
+    .modal-img { width: 100%; height: 110px; object-fit: cover; border-radius: 10px; border: 1px solid #DCE5E0; background-color: #EDF3F0; }
   </style>
 </head>
-  
 <body>
+
 <nav class="navbar navbar-custom sticky-top py-2 py-md-3">
-  <div class="container-fluid px-3 px-md-5 d-flex justify-content-between align-items-center">
-    <a class="navbar-brand fw-bold fs-4 mb-0" href="index.html" style="color: #3D5245;">KabarJasa <span class="badge bg-light text-dark border fs-6 fw-normal ms-1">Admin</span></a>
-    <div class="d-flex gap-2">
-      <a href="index.html" class="btn btn-outline-secondary btn-sm px-3" style="border-radius: 8px;">← Beranda</a>
-      <a href="cek.html" target="_blank" class="btn btn-outline-success btn-sm px-3" style="border-radius: 8px;">Cek Nota ↗</a>
+  <div class="container-fluid px-3 px-md-5 d-flex justify-content-between align-items-center flex-nowrap">
+    <a class="navbar-brand fw-bold fs-4 mb-0" href="index.html" style="color: #3D5245;">KabarJasa</a>
+    <div class="d-flex gap-1 gap-md-2">
+      <a href="index.html" class="btn btn-outline-secondary nav-btn fw-semibold">← Beranda</a>
+      <a href="cek.html" target="_blank" class="btn btn-outline-success nav-btn fw-semibold">Cek Nota ↗</a>
     </div>
   </div>
 </nav>
 
 <div class="container py-4" style="max-width: 960px;">
-  <div class="d-flex justify-content-between align-items-center mb-4">
-    <h4 class="fw-bold mb-0" style="color: #3D5245;">Dasbor Admin & Teknisi</h4>
-    <a href="cek.html" target="_blank" class="btn btn-outline-secondary btn-sm">Lihat Halaman Pelanggan ↗</a>
+  <div class="mb-3">
+    <h4 class="fw-bold mb-1" style="color: #3D5245;">Dasbor Admin & Teknisi</h4>
+    <p class="text-muted small mb-0">Kelola pesanan baru, bukti foto progres, dan notifikasi WhatsApp pelanggan.</p>
   </div>
 
-  <div class="card-custom p-4 mb-4 shadow-sm">
+  <div class="card-custom p-3 p-md-4 mb-4">
     <h6 class="fw-bold mb-3">Tambah Pesanan Baru</h6>
     <form id="formTambah" class="row g-3">
       <div class="col-md-3">
-        <label class="form-label small text-muted">Nama Pelanggan</label>
+        <label class="form-label small text-muted mb-1">Nama Pelanggan</label>
         <input type="text" id="namaPelanggan" class="form-control" placeholder="Contoh: Eko Prasetyo" required>
       </div>
       <div class="col-md-3">
-        <label class="form-label small text-muted">No. WhatsApp (628...)</label>
+        <label class="form-label small text-muted mb-1">No. WhatsApp (628...)</label>
         <input type="text" id="noWa" class="form-control" placeholder="628123456789" required>
       </div>
       <div class="col-md-3">
-        <label class="form-label small text-muted">Nama Barang / Jasa</label>
+        <label class="form-label small text-muted mb-1">Nama Barang / Jasa</label>
         <input type="text" id="namaBarang" class="form-control" placeholder="Servis Laptop Asus" required>
       </div>
       <div class="col-md-3">
-        <label class="form-label small text-muted">Foto Awal (Before)</label>
+        <label class="form-label small text-muted mb-1">Foto Awal (Before)</label>
         <input type="file" id="fileBefore" class="form-control" accept="image/*" capture="environment">
       </div>
-      <div class="col-12 text-end">
+      <div class="col-12 d-grid d-md-flex justify-content-md-end">
         <button type="submit" id="btnSimpanBaru" class="btn btn-sage px-4 fw-semibold">Simpan Pesanan</button>
       </div>
     </form>
   </div>
 
-  <div class="d-flex justify-content-between align-items-center mb-3">
+  <div class="d-flex flex-column flex-sm-row justify-content-between align-items-stretch align-items-sm-center gap-2 mb-3">
     <h6 class="fw-bold mb-0">Daftar Pesanan Aktif</h6>
-    <input type="text" id="cariNama" class="form-control form-control-sm" style="max-width: 240px;" placeholder="Cari nama atau nota...">
+    <input type="text" id="cariNama" class="form-control form-control-sm" style="max-width: 100%; width: 260px;" placeholder="Cari nama atau nota...">
   </div>
 
   <div id="daftarPesanan" class="d-flex flex-column gap-2">
@@ -74,36 +88,35 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content" style="border-radius: 16px;">
       <div class="modal-header border-0 pb-0">
-        <h6 class="modal-title fw-bold">Update Progres & Bukti Foto (<span id="modalNotaTitle"></span>)</h6>
+        <h6 class="modal-title fw-bold">Update Progres (<span id="modalNotaTitle"></span>)</h6>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
         <input type="hidden" id="editNotaId">
-              <div class="row g-2 mb-3 text-center">
+        <div class="row g-2 mb-3 text-center">
           <div class="col-4">
             <span class="small text-muted d-block mb-1">1. Awal</span>
-            <img id="modalFotoBefore" src="" class="modal-img" style="height: 120px;">
+            <img id="modalFotoBefore" src="" class="modal-img">
           </div>
           <div class="col-4">
             <span class="small text-muted d-block mb-1">2. Proses</span>
-            <img id="modalFotoProses" src="" class="modal-img" style="height: 120px;">
+            <img id="modalFotoProses" src="" class="modal-img">
           </div>
           <div class="col-4">
             <span class="small text-muted d-block mb-1">3. Akhir</span>
-            <img id="modalFotoAfter" src="" class="modal-img" style="height: 120px;">
+            <img id="modalFotoAfter" src="" class="modal-img">
           </div>
         </div>
         <div class="mb-2">
-          <label class="form-label small text-muted">Unggah / Ganti Foto Proses</label>
+          <label class="form-label small text-muted mb-1">Unggah / Ganti Foto Proses</label>
           <input type="file" id="fileProses" class="form-control form-control-sm" accept="image/*" capture="environment">
         </div>
         <div class="mb-3">
-          <label class="form-label small text-muted">Unggah / Ganti Foto Hasil Akhir (After)</label>
+          <label class="form-label small text-muted mb-1">Unggah / Ganti Foto Hasil Akhir (After)</label>
           <input type="file" id="fileAfter" class="form-control form-control-sm" accept="image/*" capture="environment">
         </div>
-
         <div class="mb-3">
-          <label class="form-label small text-muted">Status Pengerjaan</label>
+          <label class="form-label small text-muted mb-1">Status Pengerjaan</label>
           <select id="editStatus" class="form-select">
             <option value="Diterima">Diterima</option>
             <option value="Diproses">Diproses</option>
@@ -111,7 +124,7 @@
           </select>
         </div>
         <div class="mb-3">
-          <label class="form-label small text-muted">Catatan Teknisi</label>
+          <label class="form-label small text-muted mb-1">Catatan Teknisi</label>
           <textarea id="editCatatan" class="form-control" rows="2" placeholder="Tulis progres pengerjaan..."></textarea>
         </div>
         <button type="button" id="btnSimpanUpdate" class="btn btn-sage w-100 fw-semibold">Simpan Perubahan</button>
@@ -119,7 +132,8 @@
     </div>
   </div>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.9/dist/js/bootstrap.bundle.min.js"></script>
-<script type="module" src="admin.js?v=7"></script>
+
+<script src="https://jsdelivr.net"></script>
+<script type="module" src="admin.js?v=8"></script>
 </body>
 </html>
